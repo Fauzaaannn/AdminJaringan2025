@@ -8,9 +8,9 @@
   <img src="https://upload.wikimedia.org/wikipedia/id/4/44/Logo_PENS.png" alt="Logo PENS">
   <h3 style="text-align: center;">Disusun Oleh : </h3>
   <p style="text-align: center;">
-    <strong>Fauzan Abderrasheed (3123500020) </strong><br>
-    <strong>Muhammad Rafi Dhiyaulhaq (3123500004) </strong><br>
-    <strong>Arva Zaki Fanadzan (3123500014)</strong>
+    <strong>Nama: Fauzan Abderrasheed</strong><br>
+    <strong>NRP: 3123500020 </strong><br>
+    <strong>Kelas: D3 IT A</strong>
   </p>
 <h3 style="text-align: center;line-height: 1.5">Politeknik Elektronika Negeri Surabaya<br>Departemen Teknik Informatika Dan Komputer<br>Program Studi Teknik Informatika<br>2023/2024</h3>
   <hr><hr>
