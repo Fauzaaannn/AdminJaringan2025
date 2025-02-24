@@ -1,6 +1,6 @@
 <div align="center">
   <h1 style="text-align: center;font-weight: bold">Laporan Praktikum
-  <br>Sistem Operasi</h1>
+  <br>Workshop Administrasi Jaringan</h1>
   <h4 style="text-align: center;">Dosen Pengampu : Dr. Ferry Astika Saputra, S.T., M.Sc.</h4>
 </div>
 <br />
