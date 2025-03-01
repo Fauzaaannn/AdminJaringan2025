@@ -56,7 +56,7 @@ TCP memiliki beberapa langkah utama untuk memastikan koneksi antara dua perangka
 
 1. Three-Way Handshake (Membangun Koneksi)
 
-    ![versi http](assets/three-way-handshake.png)
+   ![versi http](assets/three-way-handshake.png)
 
    Seperti namanya, terdapat 3 langkah untuk TCP membangun koneksi, berikut langkah-langkahnya:
 
@@ -66,7 +66,7 @@ TCP memiliki beberapa langkah utama untuk memastikan koneksi antara dua perangka
 
 2. Pengiriman Data (Data Transmission)
 
-    ![versi http](assets/data-transfer.png)
+   ![versi http](assets/data-transfer.png)
 
    Setelah koneksi terbentuk, data dikirim dalam bentuk segmen TCP dengan mekanisme berikut:
 
@@ -78,7 +78,7 @@ TCP memiliki beberapa langkah utama untuk memastikan koneksi antara dua perangka
 
 3. Four-Way Handshake (Terminasi Koneksi)
 
-    ![versi http](assets/termination.png)
+   ![versi http](assets/termination.png)
 
    Proses 4 langkah yang digunakan oleh TCP untuk mengakhiri koneksi:
 
