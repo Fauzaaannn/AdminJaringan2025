@@ -24,20 +24,20 @@ Tujuan dasar sistem berkas adalah untuk merepresentasikan dan mengatur sumber da
 
 Sistem berkas dapat dianggap sebagai sebuah sistem yang terdiri dari empat komponen utama:
 
-- Ruang nama - cara untuk menamai sesuatu dan mengaturnya dalam sebuah hirarki
+- Namespace - cara untuk menamai sesuatu dan mengaturnya dalam sebuah hirarki
 - API - seperangkat panggilan sistem untuk menavigasi dan memanipulasi objek
 - Model keamanan - skema untuk melindungi, menyembunyikan, dan berbagi sesuatu
 - Implementasi - perangkat lunak untuk menghubungkan model logis ke perangkat keras
 
-Sistem berkas modern terus berkembang dengan meningkatkan kecepatan, keandalan, dan fitur tambahan di atas fungsi sistem berkas tradisional. Sistem berkas berbasis disk yang paling umum digunakan termasuk ext4, XFS, UFS, ZFS, dan Btrfs dari Oracle, serta sistem berkas asing seperti FAT dan NTFS yang digunakan di Windows, serta ISO 9660 yang digunakan untuk CD dan DVD.
+Sistem berkas berbasis disk modern terus berkembang dengan meningkatkan kecepatan, keandalan, dan fitur tambahan di atas fungsi sistem berkas tradisional. Sistem berkas berbasis disk yang paling umum digunakan termasuk ext4, XFS, UFS, ZFS, dan Btrfs dari Oracle, juga masih banyak sistem berkas lain yang tersedia, termasuk VxFS dari Veritas dan JFS dari IBM. Selain itu, ada sistem berkas asing seperti FAT dan NTFS yang digunakan di Windows, serta ISO 9660 yang digunakan untuk CD dan DVD. Sebagian sistem berkas modern berusaha mengimplementasikan fungsionalitas sistem berkas tradisional dengan cara yang lebih cepat dan andal.
 
 ### **Pathnames**
 
-Untuk menjaga ketepatan terminologi, sebaiknya menggunakan "direktori" daripada "folder" dalam konteks teknis. Dalam sistem berkas, jalan adalah daftar direktori yang mengarah ke berkas. Jalur dapat absolut, yang menunjukkan lokasi lengkap berkas dalam hierarki, atau relatif, yang bergantung pada lokasi kerja saat ini.
+Untuk menjaga ketepatan terminologi, sebaiknya menggunakan "direktori" daripada "folder" dalam konteks teknis. Dalam sistem berkas, pathname adalah daftar direktori yang mengarah ke berkas. pathname dapat absolut, yang menunjukkan lokasi lengkap berkas dalam hierarki (misalnya, /home/username/file.txt), atau relatif, yang bergantung pada lokasi kerja saat ini (misalnya, ./file.txt).
 
 ### **Filesystem Mounting and Unmounting**
 
-Sistem berkas terdiri dari bagian-bagian lebih kecil yang masing-masing memiliki berkas, direktori, dan subdirektori, yang secara keseluruhan membentuk pohon berkas. Cabang-cabang dalam pohon berkas ini disebut sistem berkas, dan perintah "mount" dapat digunakan untuk melekat cabang-cabang dalam pohon berkas ini. Perintah ini akan memetakan direktori dalam pohon berkas yang sudah ada sebagai titik mount untuk sistem berkas baru.
+Sistem berkas terdiri dari bagian-bagian lebih kecil yang masing-masing memiliki berkas, direktori, dan subdirektori, yang secara keseluruhan membentuk pohon berkas. Cabang-cabang dalam pohon berkas ini disebut sistem berkas, dan perintah "mount" digunakan untuk memasang sistem berkas pada pohon berkas. Perintah “mount” memetakan sebuah direktori dalam pohon berkas yang ada, yang disebut titik pemasangan (mount point), ke akar sistem berkas baru.
 
 Contoh:
 
@@ -75,11 +75,15 @@ ps up "1234 5678 91011"
 
 ### **Organization of the file tree**
 
-Sistem UNIX memiliki struktur yang tidak teratur dan banyak konvensi penamaan yang tidak kompatibel, sehingga sulit untuk mengupgradenya. Dalam versi minimal, sistem berkas root mencakup direktori root, serta file dan subdirektori penting. Kernel sistem operasi biasanya berada di bawah direktori "/boot", tetapi lokasinya dapat berbeda-beda tergantung pada sistem operasi yang digunakan. Kernel BSD dan beberapa versi UNIX terdiri dari berbagai komponen, bukan satu file.
+Sistem UNIX memiliki struktur yang tidak teratur dan banyak konvensi penamaan yang tidak kompatibel, sehingga sulit untuk meningkatkan sistem operasi.
 
-/etc berisi file sistem dan konfigurasi yang penting. /sbin dan /bin untuk utilitas penting, dan terkadang /tmp untuk file sementara. Secara tradisional /dev merupakan bagian dari sistem berkas root, tetapi sekarang ini /dev merupakan sistem berkas virtual yang di-mount secara terpisah.
+Sistem berkas root mencakup setidaknya direktori root dan seperangkat berkas serta subdirektori minimal. Kernel sistem operasi biasanya berada di bawah direktori "/boot", tetapi nama dan lokasinya dapat berbeda-beda tergantung pada sistem operasi yang digunakan. Kernel BSD dan beberapa versi UNIX terdiri dari berbagai komponen, bukan satu file.
 
-Beberapa sistem menyimpan berkas pustaka di direktori "/lib" atau "/lib64", sementara sistem lain memindahkan berkas ke direktori "/usr/lib", dengan "/lib" sering kali digunakan sebagai link simbolik. Sementara FreeBSD menempatkan konfigurasi lokal di "/usr/local", direktori "/var" berisi data yang sering diubah, seperti direktori spool, log, dan informasi akuntansi, dan program standar disimpan di direktori "/usr". Agar sistem dapat berfungsi dalam mode multiuser, kedua direktori ini harus tersedia.
+/etc berisi file sistem dan konfigurasi yang krusial. /sbin dan /bin untuk utilitas penting, dan terkadang /tmp untuk file sementara. Secara tradisional /dev merupakan bagian dari sistem berkas root, tetapi sekarang ini /dev merupakan sistem berkas virtual yang di-mount secara terpisah.
+
+Beberapa sistem menyimpan berkas pustaka bersama (shared library) dan berkas lainnya, seperti preprocessor C, di direktori "/lib" atau "/lib64", sementara sistem lain memindahkan berkas ke direktori "/usr/lib", dengan "/lib" sering kali digunakan sebagai link simbolik.
+
+Direktori /usr dan /var memiliki peran yang sangat penting. Direktori /usr menyimpan sebagian besar program standar yang tidak kritis untuk operasi sistem, disertai berkas-berkas lain seperti manual online dan pustaka. Di FreeBSD, konfigurasi lokal umumnya ditempatkan di /usr/local. Sementara itu, direktori /var menyimpan direktori spool, berkas log, data akuntansi, serta berkas-berkas lain yang sering berubah atau tumbuh dengan cepat pada setiap host. Kedua direktori ini harus selalu tersedia agar sistem dapat berjalan hingga mencapai mode multiuser.
 
 ![image.png](assets/Chapter-5/pathname.png)
 
@@ -252,3 +256,46 @@ $ setfacl -m u:abdou:rw /etc/passwd
 ```
 
 ![image.png](assets/Chapter-5/setfacl-user-etc-passwd.png)
+
+### Implementasi ACL
+
+Secara teoritis, pemeliharaan dan penegakan ACL bisa menjadi tanggung jawab dari beberapa komponen dalam sistem. ACL dapat diterapkan oleh kernel untuk seluruh sistem berkas, oleh masing-masing sistem berkas itu sendiri, atau bahkan oleh perangkat lunak tingkat atas seperti server NFS dan SMB.
+
+### POSIX ACLs
+
+POSIX ACLs merupakan implementasi ACL tradisional pada sistem Unix. ACL jenis ini didukung oleh mayoritas sistem operasi yang mirip Unix, termasuk Linux, FreeBSD, dan Solaris.
+
+**Format entri yang umum ditemui pada POSIX ACLs:**
+
+| Format                | Contoh          | Menetapkan izin untuk         |
+| --------------------- | --------------- | ----------------------------- |
+| user::perms           | user:rw-        | Pemilik berkas                |
+| user:username:perms   | user:abdou:rw-  | Pengguna dengan nama tertentu |
+| group::perms          | group:r-x       | Grup berkas                   |
+| group:groupname:perms | group:users:r-x | Grup dengan nama tertentu     |
+| mask::perms           | mask::rwx       | Izin maksimum                 |
+| other::perms          | other::r--      | Semua pengguna lainnya        |
+
+Contoh penerapannya:
+
+```bash
+$ setfacl -m user:abdou:rwx,group:users:rwx,other::r /home/abdou
+
+$ getfacl --omit-header /home/abdou
+
+user::rwx
+user:abdou:rwx
+group::r-x
+group:users:r-x
+mask::rwx
+other::r--
+
+```
+
+### NFSv4 ACLs
+
+NFSv4 ACLs merupakan jenis ACL yang lebih baru dan memiliki kekuatan lebih. ACL ini didukung oleh beberapa sistem operasi mirip Unix, seperti Linux dan FreeBSD.
+
+Meskipun NFSv4 ACLs mirip dengan POSIX ACLs, mereka menawarkan fitur tambahan, misalnya adanya **default ACL** yang secara otomatis mengatur ACL untuk berkas dan direktori baru.
+
+**Izin berkas NFSv4**
