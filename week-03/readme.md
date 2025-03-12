@@ -19,61 +19,85 @@
 ## A. Instalasi NTP Client
 
 1. Install dan konfigurasi NTP Client
-    
-    ![Screenshot from 2025-03-06 11-59-42.png](images/2.png)
-    
+
+   ![Screenshot from 2025-03-06 11-59-42.png](images/2.png)
 
 1. Cek date saat ini berdasarkan lokasi device:
-2. Atur NTP Server
-    
-    Ubah konfigurasi NTP Server sesuai zona device, pada percobaan ini menggunakan kode zona id yaitu indonesia dari link https://www.ntppool.org/en/zone/id 
-    
-    ![Screenshot from 2025-03-06 11-59-42.png](images/4.png)
-    
-    Lalu restart menggunakan command `systemctl restart ntpsec` dan verifikasi status seperti berikut:
-    
-    ![Screenshot from 2025-03-06 11-59-42.png](images/5.png)
-    
-    Jika kode ‘id’ sudah muncul, berarti sudah benar
-    
+1. Atur NTP Server
+
+   Ubah konfigurasi NTP Server sesuai zona device, pada percobaan ini menggunakan kode zona id yaitu indonesia dari link https://www.ntppool.org/en/zone/id
+
+   ![Screenshot from 2025-03-06 11-59-42.png](images/4.png)
+
+   Lalu restart menggunakan command `systemctl restart ntpsec` dan verifikasi status seperti berikut:
+
+   ![Screenshot from 2025-03-06 11-59-42.png](images/5.png)
+
+   Jika kode ‘id’ sudah muncul, berarti sudah benar
 
 ## B. Instalasi dan Konfigurasi Samba
 
-1. Install samba 
-    
-    ![Screenshot from 2025-03-06 11-59-42.png](images/6.png)
-    
-2. Membuat public shared folder
-    
-    ![Screenshot from 2025-03-06 11-59-42.png](images/7.png)
-    
-3. Lakukan konfigurasi pada /etc/samba/smb.conf
-    1. tambahkan unix charset = UTF-8 dan interfaces 127.0.0.0/8 10.0.0.0/24
-        
-        ![Screenshot from 2025-03-06 11-59-42.png](images/9.png)
-        
-    2. Cek map to guest = bad user
-        
-        ![Screenshot from 2025-03-06 11-59-42.png](images/10.png)
-        
-    3. Konfigurasi shared directory
-        
-        ![Screenshot from 2025-03-06 11-59-42.png](images/11.png)
-        
-    4. Restart smbd menggunakan command `systemctl restart smbd`
-        
-        ![Screenshot from 2025-03-06 11-59-42.png](images/12.png)
-        
-    5. Akses melalui Windows
-        
-        ![Screenshot from 2025-03-06 11-59-42.png](images/16.jpg)
-        
-    6. Akses melalui Linux
-        
-        ![Screenshot from 2025-03-06 11-59-42.png](images/14.png)
-        
+1.  Install samba
 
-1. Membuat limited shared folder
+    ![Screenshot from 2025-03-06 11-59-42.png](images/6.png)
+
+2.  Membuat public shared folder
+
+    ![Screenshot from 2025-03-06 11-59-42.png](images/7.png)
+
+3.  Lakukan konfigurasi pada /etc/samba/smb.conf
+
+    1. tambahkan unix charset = UTF-8 dan interfaces 127.0.0.0/8 10.0.0.0/24
+
+       ![Screenshot from 2025-03-06 11-59-42.png](images/9.png)
+
+    2. Cek map to guest = bad user
+
+       ![Screenshot from 2025-03-06 11-59-42.png](images/10.png)
+
+    3. Konfigurasi shared directory
+
+       ![Screenshot from 2025-03-06 11-59-42.png](images/11.png)
+
+    4. Restart smbd menggunakan command `systemctl restart smbd`
+
+       ![Screenshot from 2025-03-06 11-59-42.png](images/12.png)
+
+    5. Akses melalui Windows
+
+       ![Screenshot from 2025-03-06 11-59-42.png](images/16.jpg)
+
+    6. Akses melalui Linux
+
+       ![Screenshot from 2025-03-06 11-59-42.png](images/14.png)
+
+4.  Membuat limited shared folder
+
+    1.  Buat grup baru smbgroup01, buat direktori share01, ubah kepemilikan folder share01 menjadi smbgroup01, berikan izin penuh (read, write, execute) kepada pemilik dan grup. Izin 770 memastikan keamanan dengan membatasi akses ke anggota grup yang telah ditentukan:
+
+        ![images.png](images/Screenshot_1.png)
+
+    2.  Konfigurasi /etc/samba/smb.conf
+
+        ![images.png](images/Screenshot_8.png)
+
+    3.  Tambahkan share01 pada /etc/samba/smb.conf
+
+        ![images.png](images/Screenshot_4.png)
+
+    4.  tambahkan user baru 'debian'
+
+        ![images.png](images/Screenshot_2.png)
+
+        ![images.png](images/Screenshot_3.png)
+
+    5.  Login pada Windows
+
+        ![images.png](images/Screenshot_5.png)
+
+    6.  Login dengan file manager linux dan cli
+
+        ![images.png](images/Screenshot_6.png)
 
 ## C. Rangkuman tentang Manajemen Paket
 
@@ -81,9 +105,9 @@
 
 Debian GNU/Linux menggunakan repositori sebagai metode distribusi perangkat lunak. Pendekatan ini memungkinkan sentralisasi aplikasi dan memberikan antarmuka yang sederhana untuk mengelola serta memperbarui sistem, sehingga pengguna tidak perlu mengunjungi situs web masing-masing aplikasi secara langsung.
 
-### 1.1 Berkas *sources.list*
+### 1.1 Berkas _sources.list_
 
-Alamat repositori Debian disimpan dalam berkas */etc/apt/sources.list* dan juga pada berkas-berkas dengan tipe */etc/apt/sources.list.d/xxx.list*. Untuk mengedit berkas ini, Anda dapat menggunakan perintah-perintah berikut (dalam mode administrator):
+Alamat repositori Debian disimpan dalam berkas _/etc/apt/sources.list_ dan juga pada berkas-berkas dengan tipe _/etc/apt/sources.list.d/xxx.list_. Untuk mengedit berkas ini, Anda dapat menggunakan perintah-perintah berikut (dalam mode administrator):
 
 ```bash
 apt edit-sources
@@ -99,7 +123,7 @@ Beberapa elemen penting dalam berkas tersebut antara lain:
 - **bookworm** atau **bookworm-security**: Nama cabang repositori yang spesifik.
 - **main**, **contrib**, **non-free**, **non-free-firmware**: Bagian atau komponen repositori.
 
-Penting untuk diperhatikan, meskipun sistem ini didasarkan pada Debian Stable, nama versi spesifik seperti *bookworm* digunakan untuk menunjukkan versi paket yang ada. Secara umum, *stable* merupakan label generik yang menggambarkan rilis stabil saat ini. Saat Debian beralih ke versi baru (misalnya Debian 13 *Trixie*), *bookworm* akan berubah status menjadi *oldstable*.
+Penting untuk diperhatikan, meskipun sistem ini didasarkan pada Debian Stable, nama versi spesifik seperti _bookworm_ digunakan untuk menunjukkan versi paket yang ada. Secara umum, _stable_ merupakan label generik yang menggambarkan rilis stabil saat ini. Saat Debian beralih ke versi baru (misalnya Debian 13 _Trixie_), _bookworm_ akan berubah status menjadi _oldstable_.
 
 ### 1.2 Cabang dan Komponen Repositori
 
@@ -110,18 +134,18 @@ Repositori resmi Debian terbagi menjadi empat bagian:
 - **non-free**: Paket yang tidak mematuhi DFSG.
 - **non-free-firmware**: Firmware non-free yang disertakan secara default sejak Debian 12.
 
-Hanya paket yang terdapat di bagian *main* yang mendapatkan dukungan penuh dari Proyek Debian dan dianggap 100% perangkat lunak bebas. Paket dalam contrib, non-free, dan non-free-firmware sebagian atau seluruhnya non-free. Paket pada bagian lainnya, meskipun dapat berguna, tidak mendapatkan dukungan penuh dan bisa memerlukan driver proprietary untuk perangkat keras tertentu.
+Hanya paket yang terdapat di bagian _main_ yang mendapatkan dukungan penuh dari Proyek Debian dan dianggap 100% perangkat lunak bebas. Paket dalam contrib, non-free, dan non-free-firmware sebagian atau seluruhnya non-free. Paket pada bagian lainnya, meskipun dapat berguna, tidak mendapatkan dukungan penuh dan bisa memerlukan driver proprietary untuk perangkat keras tertentu.
 
 ### 1.3 Paket Backport
 
-Debian menyediakan repositori khusus yang disebut *backports*. Repositori ini berisi versi terbaru dari aplikasi yang ada pada repositori pengembangan, tetapi dikompilasi ulang agar kompatibel dengan rilis stabil. Meskipun *backports* tidak diaktifkan secara default, mekanisme ini memungkinkan pengguna untuk mengakses pembaruan tanpa mengganggu stabilitas sistem, karena prioritas utama tetap diberikan kepada repositori standar.
+Debian menyediakan repositori khusus yang disebut _backports_. Repositori ini berisi versi terbaru dari aplikasi yang ada pada repositori pengembangan, tetapi dikompilasi ulang agar kompatibel dengan rilis stabil. Meskipun _backports_ tidak diaktifkan secara default, mekanisme ini memungkinkan pengguna untuk mengakses pembaruan tanpa mengganggu stabilitas sistem, karena prioritas utama tetap diberikan kepada repositori standar.
 
 ### 1.4 Memodifikasi Repositori
 
-Sebelum mengubah sumber perangkat lunak, pahami risiko penggunaan komponen *contrib* atau *non-free*:
+Sebelum mengubah sumber perangkat lunak, pahami risiko penggunaan komponen _contrib_ atau _non-free_:
 
 - **Kebebasan Terbatas:** Paket non-free tidak sepenuhnya bebas.
-- **Dukungan Terbatas:** Proyek Debian hanya mendukung paket yang ada di bagian *main*.
+- **Dukungan Terbatas:** Proyek Debian hanya mendukung paket yang ada di bagian _main_.
 - **Integritas Sistem:** Menambahkan paket non-free dapat mengubah komposisi sistem Debian yang 100% bebas.
 
 Untuk mengubah sumber perangkat lunak, edit berkas `sources.list` dengan perintah:
@@ -131,14 +155,14 @@ apt edit-sources
 
 ```
 
-Contoh baris untuk paket *free* saja:
+Contoh baris untuk paket _free_ saja:
 
 ```bash
 deb http://deb.debian.org/debian/ bookworm main
 
 ```
 
-Contoh baris untuk paket *free* dan *proprietary*:
+Contoh baris untuk paket _free_ dan _proprietary_:
 
 ```bash
 deb http://deb.debian.org/debian/ bookworm main contrib non-free non-free-firmware
@@ -151,26 +175,26 @@ Anda juga dapat mengubah sumber perangkat lunak melalui Synaptic Package Manager
 
 ### 2. APT di Terminal
 
-APT (Advanced Package Tool) adalah alat utama untuk mengelola paket di Debian melalui terminal. Selain APT, Debian juga mendukung *aptitude*, yang menawarkan fitur manajemen paket tambahan.
+APT (Advanced Package Tool) adalah alat utama untuk mengelola paket di Debian melalui terminal. Selain APT, Debian juga mendukung _aptitude_, yang menawarkan fitur manajemen paket tambahan.
 
 ### 2.1 Perintah Informasi (User Mode)
 
 Perintah berikut dapat dijalankan tanpa hak akses root karena hanya menampilkan informasi:
 
-- `apt show foo` – Menampilkan informasi detail paket *foo*.
-- `apt search foo` – Mencari paket yang mengandung kata *foo*.
-- `apt-cache policy foo` – Menampilkan kebijakan versi untuk paket *foo*.
+- `apt show foo` – Menampilkan informasi detail paket _foo_.
+- `apt search foo` – Mencari paket yang mengandung kata _foo_.
+- `apt-cache policy foo` – Menampilkan kebijakan versi untuk paket _foo_.
 
 ### 2.2 Perintah Pemeliharaan (Administrator Mode)
 
 Perintah di bawah ini harus dijalankan dengan hak akses root (gunakan `su -` untuk masuk ke mode administrator):
 
 - `apt update` – Memperbarui metadata dari repositori.
-- `apt install foo` – Menginstal paket *foo* beserta dependensinya.
+- `apt install foo` – Menginstal paket _foo_ beserta dependensinya.
 - `apt upgrade` – Memperbarui semua paket yang telah terinstal.
 - `apt full-upgrade` – Memperbarui paket dengan penambahan atau penghapusan paket lain jika diperlukan.
-- `apt remove foo` – Menghapus paket *foo* tanpa menghapus berkas konfigurasi.
-- `apt purge foo` – Menghapus paket *foo* beserta berkas konfigurasinya.
+- `apt remove foo` – Menghapus paket _foo_ tanpa menghapus berkas konfigurasi.
+- `apt purge foo` – Menghapus paket _foo_ beserta berkas konfigurasinya.
 - `apt autoremove foo` – Menghapus paket yang tidak lagi diperlukan.
 - `apt clean` – Menghapus cache paket yang tersimpan.
 - `apt autoclean` – Menghapus cache paket yang usang.
@@ -200,7 +224,7 @@ Software adalah antarmuka grafis yang memudahkan pengelolaan paket aplikasi di D
 - **Menginstal aplikasi:** Cukup pilih aplikasi yang diinginkan dan tekan tombol “Instal”. Proses instalasi dapat dipantau melalui jendela utama.
 - **Menghapus aplikasi:** Buka kategori “Terinstal” dan pilih “Hapus” untuk menghapus aplikasi dengan konfirmasi.
 - **Memperbarui aplikasi:** Daftar pembaruan dapat dilihat di bagian “Pembaruan”. Beberapa pembaruan, terutama yang menyangkut sistem operasi, mungkin memerlukan restart.
-- **Mengubah repositori:** Melalui menu “Repositori”, Anda dapat mengatur sumber paket, misalnya menambahkan repositori *non-free*, sesuai dengan informasi dari berkas *sources.list*.
+- **Mengubah repositori:** Melalui menu “Repositori”, Anda dapat mengatur sumber paket, misalnya menambahkan repositori _non-free_, sesuai dengan informasi dari berkas _sources.list_.
 - **Pembaruan otomatis:** Aktifkan opsi pembaruan otomatis agar sistem tetap terbarui tanpa intervensi manual.
 
 ---
@@ -215,7 +239,7 @@ Discover adalah manajer paket bawaan KDE yang intuitif dan efisien, menggabungka
 - **Widget dan Addon Plasma:** Menyediakan opsi untuk menambahkan komponen tambahan ke lingkungan desktop Plasma.
 - **Penghapusan Aplikasi:** Hapus aplikasi dengan mudah dari kategori “Terinstal”.
 - **Pembaruan Aplikasi:** Proses pembaruan dikelola secara otomatis atau dapat dilakukan manual dengan memilih “Perbarui Semua”.
-- **Pengelolaan Repositori:** Ubah sumber aplikasi melalui menu “Pengaturan” yang menampilkan alamat repositori sesuai berkas *sources.list*.
+- **Pengelolaan Repositori:** Ubah sumber aplikasi melalui menu “Pengaturan” yang menampilkan alamat repositori sesuai berkas _sources.list_.
 
 ---
 
@@ -227,7 +251,7 @@ Synaptic adalah alat pengelolaan paket dengan antarmuka grafis yang menampilkan 
 
 - **Antarmuka Terbagi:** Terdiri dari bilah alat, panel kiri (untuk pengurutan dan pemilihan), panel tengah (daftar paket), dan panel bawah (deskripsi paket).
 - **Muat Ulang Informasi:** Pastikan untuk melakukan “Muat Ulang” saat pertama kali membuka Synaptic untuk memperbarui data paket.
-- **Pengelolaan Repositori:** Ubah sumber paket melalui menu “Pengaturan > Repositori”, sesuai dengan isi berkas */etc/apt/sources.list*.
+- **Pengelolaan Repositori:** Ubah sumber paket melalui menu “Pengaturan > Repositori”, sesuai dengan isi berkas _/etc/apt/sources.list_.
 - **Pembaruan Sistem:** Muat ulang informasi paket, tandai pembaruan, dan terapkan perubahan. Periksa ketergantungan tambahan jika diperlukan.
 - **Penginstalan Ulang:** Gunakan opsi “Tandai untuk Penginstalan Ulang” untuk mengembalikan konfigurasi default suatu aplikasi.
 - **Penghapusan Paket:** Tandai paket untuk penghapusan atau penghapusan lengkap (termasuk konfigurasi) dengan klik kanan.
@@ -348,4 +372,4 @@ Debian memiliki beberapa cabang distribusi, masing-masing dengan karakteristikny
 - **Unstable ("Sid"):** Cabang inovasi yang selalu menerima paket terbaru, namun tidak selalu stabil. Meski demikian, beberapa pengguna memilih untuk menggunakannya secara rutin.
 - **Experimental:** Repositori untuk menguji perangkat lunak dalam versi alpha atau beta, bukan bagian dari distribusi resmi.
 
-Semua cabang ini dinamai berdasarkan karakter dari film Toy Story®. Saat ini, nama kode untuk versi stable adalah *Bookworm*, testing adalah *Trixie*, dan oldstable adalah *Bullseye*, sedangkan experimental tidak memiliki nama kode.
+Semua cabang ini dinamai berdasarkan karakter dari film Toy Story®. Saat ini, nama kode untuk versi stable adalah _Bookworm_, testing adalah _Trixie_, dan oldstable adalah _Bullseye_, sedangkan experimental tidak memiliki nama kode.
