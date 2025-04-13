@@ -92,15 +92,15 @@ Terlihat bahwa ping sudah berhasil dan terkoneksi.
 
 Langkah pertama untuk konfigurasi NTP adalah melakukan instalasi NTP pada VM1.
 
-![Screenshot_1.png](Screenshot_1.png)
+![Screenshot_1.png](NTP/Screenshot_1.png)
 
 Menambahkan NTP Server sesuai dengan timezone, untuk praktikum ini maka timezone yang digunakan adalah indonesia yaitu *id*
 
-![Screenshot_2.png](Screenshot_2.png)
+![Screenshot_2.png](NTP/Screenshot_2.png)
 
 Restart NTP dan lakukan percobaan dengan command `ntpq -p`
 
-![Screenshot_3.png](Screenshot_3.png)
+![Screenshot_3.png](NTP/Screenshot_3.png)
 
 ---
 
@@ -123,25 +123,25 @@ root@smb:~# chmod 777 /home/share
 
 Tambahkan unix charset = UTF-8 dan interfaces 127.0.0.0/8 10.0.0.0/24 192.0.0.0/24
 
-![Screenshot_2.png](Screenshot_2.png)
+![Screenshot_2.png](samba/Screenshot_2.png)
 
 Cek map to guest = bad user
 
-![Screenshot_1.png](Screenshot_1.png)
+![Screenshot_1.png](samba/Screenshot_1.png)
 
 Konfigurasi shared directory
 
-![Screenshot_3.png](Screenshot_3.png)
+![Screenshot_3.png](samba/Screenshot_3.png)
 
 Save lalu lakukan restart smbd
 
 Restart smbd menggunakan command `systemctl restart smbd`
 
-![Screenshot_4.png](Screenshot_4.png)
+![Screenshot_4.png](samba/Screenshot_4.png)
 
 **Cek dan test apakah bisa diakses pada VM2 menggunakan internal network**
 
-![Screenshot_5.png](Screenshot_5.png)
+![Screenshot_5.png](samba/Screenshot_5.png)
 
 ---
 
@@ -163,11 +163,11 @@ root@dlp:~# apt -y install bind9 bind9-utils
 
 Menambahkan file konfigurasi baru yaitu `named.conf.internal-zones` ke dalam file utama konfigurasi BIND `/etc/bind/named.conf`
 
-![Screenshot_4.png](Screenshot_4.png)
+![Screenshot_4.png](BIND-DNS/Screenshot_4.png)
 
 ### Konfigurasi ACL entry untuk local network
 
-![Screenshot_5.png](Screenshot_5.png)
+![Screenshot_5.png](BIND-DNS/Screenshot_5.png)
 
 - **Menentukan ACL (Access Control List)**
     - Anda membuat ACL bernama `internal-network` untuk jaringan **192.168.200.0/24**.
@@ -181,7 +181,7 @@ Menambahkan file konfigurasi baru yaitu `named.conf.internal-zones` ke dalam f
 
 ### Konfigurasi Zona DNS di BIND
 
-![Screenshot_6.png](Screenshot_6.png)
+![Screenshot_6.png](BIND-DNS/Screenshot_6.png)
 
 - **Zona Forward (kelompok4.home)**
     - Zona ini digunakan untuk menerjemahkan **nama domain ke alamat IP**.
@@ -195,7 +195,7 @@ Menambahkan file konfigurasi baru yaitu `named.conf.internal-zones` ke dalam f
 
 ### Konfigurasi BIND agar hanya menggunakan IPv4
 
-![Screenshot_7.png](Screenshot_7.png)
+![Screenshot_7.png](BIND-DNS/Screenshot_7.png)
 
 **Mengedit file `/etc/default/named`**
 
@@ -208,7 +208,7 @@ Menambahkan file konfigurasi baru yaitu `named.conf.internal-zones` ke dalam f
 
 Buat file zona yang memungkinkan server menerjemahkan nama domain menjadi alamat IP. Konfigurasikan seperti di bawah ini menggunakan Jaringan internal **`192.168.200.0/24`**, Nama domain `kelompok4.home`
 
-![Screenshot_8.png](Screenshot_8.png)
+![Screenshot_8.png](BIND-DNS/Screenshot_8.png)
 
 1. **$TTL 86400**
 
