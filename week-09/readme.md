@@ -14,11 +14,11 @@ root@dlp:~# apt -y install bind9 bind9utils
 
 Menambahkan file konfigurasi baru yaitu `named.conf.internal-zones` ke dalam file utama konfigurasi BIND `/etc/bind/named.conf`
 
-![1.jpg](1.jpg)
+![1.jpg](images/1.jpg)
 
 ### Konfigurasi akses kontrol dan kebijakan query pada BIND DNS Server
 
-![2.jpg](2.jpg)
+![2.jpg](images/2.jpg)
 
 - **Menentukan ACL (Access Control List)**
   - Membuat ACL bernama `internal-network` untuk jaringan **192.168.4.0/24**. Dimana jaringan ini adalah jaringan dari Mikrotik yang sudah diberikan untuk kelompok 4
@@ -34,21 +34,21 @@ Menambahkan file konfigurasi baru yaitu `named.conf.internal-zones` ke dalam fil
 
 ### Konfigurasi Zona DNS di BIND
 
-![image.png](images/etc-bind-named-conf-internal-zones.png)
+![13jpg](images/3.jpg)
 
 - **Zona Forward (kelompok4.home)**
   - Zona ini digunakan untuk menerjemahkan **nama domain ke alamat IP**.
   - Disimpan dalam file **`/etc/bind/kelompok4.home.lan`**.
   - Bertindak sebagai **master** (utama), artinya server ini adalah sumber resmi data DNS untuk domain tersebut.
   - `allow-update { none; };` → Tidak mengizinkan update dinamis ke zona ini.
-- **Zona Reverse (80.168.192.in-addr.arpa)**
+- **Zona Reverse (4.168.192.in-addr.arpa)**
   - Zona ini digunakan untuk **menerjemahkan alamat IP ke nama domain** (reverse lookup).
-  - Disimpan dalam file **`/etc/bind/80.168.192.db`**.
+  - Disimpan dalam file **`/etc/bind/4.168.192.db`**.
   - Juga bertindak sebagai **master**, dengan **update dinamis dinonaktifkan**.
 
 ### Konfigurasi opsi BIND untuk menggunakan hanya IPv4 dan menonaktifkan IPv6
 
-![image.png](images/etc-default-named.png)
+![4.jpg](images/4.jpg)
 
 **Mengedit file `/etc/default/named`**
 
@@ -60,16 +60,17 @@ Menambahkan file konfigurasi baru yaitu `named.conf.internal-zones` ke dalam fil
 ### Pembuatan dan konfigurasi file zona forward lookup pada BIND DNS Server
 
 Buat file zona yang memungkinkan server menerjemahkan nama domain menjadi alamat IP.
-Konfigurasikan seperti di bawah ini menggunakan Jaringan internal [**192.168.80.0/24**.], Nama domain [kelompok4.home].
+Konfigurasikan seperti di bawah ini menggunakan Jaringan internal [**192.168.4.0/24**.], Nama domain [kelompok4.home].
 
-![image.png](images/etc-bind-kelompok4-home-lan.png)
+![5.jpg](images/5.jpg)
 
+Konfigurasi ini sudah disediakan dari PC Pusat jaringan dari semua kelompok, sehingga konfigurasinya hanya perlu disamakan saja. Serial pada konfigurasi diganti dengan tanggal konfigurasi dilakukan. Pada konfigurasi di atas menggunakan ``ns`` yaitu **Name Server** yang berfungsi untuk menerjemahkan nama domain (seperti kelompok4.home) menjadi alamat IP.
 ### Pembuatan dan konfigurasi file zona reverse lookup pada BIND DNS Server.
 
 Buat file zona yang memungkinkan server menerjemahkan alamat IP menjadi nama domain.
-Konfigurasikan seperti di bawah ini menggunakan Jaringan internal [**192.168.80.0/24**.], Nama domain [kelompok4.home].
+Konfigurasikan seperti di bawah ini menggunakan Jaringan internal [**192.168.4.0/24**.], Nama domain [kelompok4.home].
 
-![image.png](images/etc-bind-80-168-192-db.png)
+![images.jpg](images/6.jpg)
 
 ## BIND: Verify Resolution
 
@@ -83,26 +84,86 @@ root@dlp:~# systemctl restart named
 
 ### Konfigurasi DNS Client untuk menggunakan DNS Server sendiri
 
-![image.png](images/etc-resolve-conf.png)
+![images.jpg](images/7.jpg)
 
 File **`/etc/resolv.conf`** digunakan oleh sistem Linux untuk menentukan **DNS server mana yang akan digunakan untuk melakukan query DNS** (resolving domain ke IP dan sebaliknya).
+### DNS Query menggunakan DiG (Domain Information Groper) untuk Forward Lookup.
+#### Testing pada PC yang digunakan untuk konfigurasi
 
-Dengan mengedit **`/etc/resolv.conf`** dan mengubah **nameserver** menjadi **10.0.0.30**, berarti:
+![images.jpg](images/8-tes-dig.jpg)
 
-✅ Mengatur sistem supaya pakai **DNS Server sendiri** (BIND di **10.0.0.30**)
+Perintah di atas digunakan untuk **mengecek resolusi nama domain ke alamat IP (Forward DNS Lookup)** dengan memanfaatkan **DNS Server yang telah dikonfigurasi**. Dapat dilihat pada gambar, ``ANSWER: 1`` menandakan bahwa server DNS memberikan satu jawaban atau respons dari query yang dikirimkan yang artinya DNS Server sudah berhasil terkoneksi.
 
-✅ Prioritaskan pencarian DNS ke **server lokal dulu**, sebelum ke DNS eksternal
+#### Testing pada PC lain yang terhubung pada IP jaringan yang sama
 
-✅ Bikin sistem bisa resolve **domain lokal** yang cuma dikenali oleh DNS internal
+![images.jpg](images/9-resolv-pc-lain.jpg)
+Gambar di atas adalah konfigurasi resolv.conf pada PC lain yang terhubung pada IP jaringan yang sama pada PC yang digunakan untuk konfigurasi, dapat dilihat pada gambar bahwa nameserver diubah menjadi IP yang digunakan untuk konfigurasi tadi. 
 
-### **DNS Query menggunakan DiG (Domain Information Groper)** untuk **Forward Lookup**.
+**Gambar di bawah adalah hasil testing dig pada pc lain yang terhubung pada jaringan IP yang sama**
 
-![image.png](images/dig-kelompok4-home.png)
+![images.jpg](images/10-tes-dig-pc-lain.jpg)
 
-Perintah di atas digunakan untuk **mengecek resolusi nama domain ke alamat IP (Forward DNS Lookup)** dengan memanfaatkan **DNS Server yang telah dikonfigurasi**.
+# Konfigurasi Web Server
 
-### Reverse DNS Lookup
+## Instalasi Apache2
 
-![image.png](images/dig-ip-server.png)
+```bash
+root@www:~# apt -y install apache2
+```
 
-Perintah di atas digunakan untuk **melakukan pencarian balik (reverse lookup)** guna menemukan **nama domain yang terkait dengan alamat IP** tertentu.
+Gunakan perintah di atas untuk melakukan instalasi apache2
+
+![images.jpg](images/11-instalasi-apache.jpg)
+## Konfigurasi Apache2
+
+### Konfigurasi Security (/etc/apache2/conf-enabled/security.conf)
+
+![images.jpg](images/12.jpg)
+
+**Fungsi**:
+- Membatasi informasi yang ditampilkan di header HTTP respons server
+- Opsi "Prod" adalah level paling ketat, hanya menampilkan "Apache" tanpa detail tambahan
+- Mencegah pengungkapan versi Apache, modul yang digunakan, dan sistem operasi
+- Ini adalah praktik keamanan penting karena mengurangi information disclosure
+
+### Konfigurasi Directory Index
+
+![images.jpg](images/13.jpg)
+
+Pada Konfigurasi ini seharusnya diubah menjadi hanya meninggalkan ``index.html`` dan ``index.htm``, tetapi tidak diubahpun outputnya akan tetap sama. Pengubahan menjadi hanya ``index.html`` dan ``index.htm`` bertujuan untuk:
+- Menentukan file yang dicari Apache ketika client mengakses URL tanpa menentukan file spesifik
+- Membatasi file default hanya ke index.html dan index.htm (file HTML statis)
+- Secara default konfigurasi Apache biasanya menyertakan index.php, index.cgi dan lainnya
+- Penghapusan file dinamis (seperti .php) dari DirectoryIndex menambah keamanan
+
+### Konfigurasi ServerName
+
+![images.jpg](images/14.jpg)
+
+Konfigurasi ini berfungsi untuk:
+- Mendefinisikan nama host utama server
+- Membantu Apache mengenali dirinya sendiri
+- Menghindari pesan error "Could not reliably determine the server's fully qualified domain name"
+- Penting untuk konfigurasi virtual host dan penanganan redirect
+- Mendukung resolusi yang tepat ketika server memiliki beberapa alamat IP atau domain
+
+### Konfigurasi Email Administrator
+
+![images.jpg](images/15.jpg)
+
+Konfigurasi ini berfungsi untuk:
+- Menetapkan alamat email administrator server
+- Ditampilkan pada halaman error server default (seperti 404, 500)
+- Memberikan cara kontak bagi user yang mengakses ketika terjadi masalah
+- Merupakan praktik profesional untuk pengelolaan server
+
+### Penerapan Konfigurasi (Reload Apache2)
+
+Gunakan command ini untuk menerapkan konfigurasi yang sudah diterapkan
+```bash
+root@www:~# systemctl reload apache2
+```
+
+Jika Konfigurasi sudah di reload dan berhasil, maka bisa di-test dengan browser domain yang sudah dikonfigurasi dari awal tadi.
+
+![images.jpg](images/16.jpg)
