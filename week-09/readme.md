@@ -1,6 +1,6 @@
 # Konfigurasi DNS Host
 
-![0](00.jpg)
+![0](images/00.jpg)
 ## Konfigurasi Jaringan Internal
 ### Instalasi BIND
 
