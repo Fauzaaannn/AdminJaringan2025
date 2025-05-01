@@ -82,7 +82,7 @@ Konfigurasikan seperti di bawah ini menggunakan Jaringan internal [**192.168.4.0
 
 ![5.jpg](images/5.jpg)
 
-Konfigurasi ini sudah disediakan dari PC Pusat jaringan dari semua kelompok, sehingga konfigurasinya hanya perlu disamakan saja. Serial pada konfigurasi diganti dengan tanggal konfigurasi dilakukan. Pada konfigurasi di atas menggunakan ``ns`` yaitu **Name Server** yang berfungsi untuk menerjemahkan nama domain (seperti kelompok4.home) menjadi alamat IP.
+Konfigurasi ini sudah disediakan dari Master DNS yang bisa diakses menggunakan ssh dengan IP `10.252.108.10/24`, sehingga konfigurasinya hanya perlu disamakan saja. Serial pada konfigurasi diganti dengan tanggal konfigurasi dilakukan. Pada konfigurasi di atas menggunakan ``ns`` yaitu **Name Server** yang berfungsi untuk menerjemahkan nama domain (seperti kelompok4.home) menjadi alamat IP.
 ### Pembuatan dan konfigurasi file zona reverse lookup pada BIND DNS Server.
 
 Buat file zona yang memungkinkan server menerjemahkan alamat IP menjadi nama domain.
