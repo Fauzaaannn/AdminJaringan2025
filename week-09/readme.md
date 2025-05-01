@@ -19,6 +19,8 @@
 # Konfigurasi DNS Host
 
 ![0](images/00.jpg)
+
+![images.jpg](images/topologi-dns.jpg)
 ## Konfigurasi Jaringan Internal
 ### Instalasi BIND
 
@@ -106,18 +108,18 @@ root@dlp:~# systemctl restart named
 
 File **`/etc/resolv.conf`** digunakan oleh sistem Linux untuk menentukan **DNS server mana yang akan digunakan untuk melakukan query DNS** (resolving domain ke IP dan sebaliknya).
 ### DNS Query menggunakan DiG (Domain Information Groper) untuk Forward Lookup.
-#### Testing pada PC yang digunakan untuk konfigurasi
+#### Testing pada PC Server
 
 ![images.jpg](images/8-tes-dig.jpg)
 
 Perintah di atas digunakan untuk **mengecek resolusi nama domain ke alamat IP (Forward DNS Lookup)** dengan memanfaatkan **DNS Server yang telah dikonfigurasi**. Dapat dilihat pada gambar, ``ANSWER: 1`` menandakan bahwa server DNS memberikan satu jawaban atau respons dari query yang dikirimkan yang artinya DNS Server sudah berhasil terkoneksi.
 
-#### Testing pada PC lain yang terhubung pada IP jaringan yang sama
+#### Testing pada PC Client
 
 ![images.jpg](images/9-resolv-pc-lain.jpg)
-Gambar di atas adalah konfigurasi resolv.conf pada PC lain yang terhubung pada IP jaringan yang sama pada PC yang digunakan untuk konfigurasi, dapat dilihat pada gambar bahwa nameserver diubah menjadi IP yang digunakan untuk konfigurasi tadi. 
+Gambar di atas adalah konfigurasi resolv.conf pada PC Client yang terhubung pada IP jaringan yang sama pada PC Server, dapat dilihat pada gambar bahwa nameserver diubah menjadi IP yang digunakan untuk konfigurasi tadi. 
 
-**Gambar di bawah adalah hasil testing dig pada pc lain yang terhubung pada jaringan IP yang sama**
+**Gambar di bawah adalah hasil testing dig pada PC Client**
 
 ![images.jpg](images/10-tes-dig-pc-lain.jpg)
 
