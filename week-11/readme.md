@@ -47,3 +47,15 @@ Surel, atau surat elektronik, adalah metode utama untuk bertukar pesan melalui i
 - Daftar surel, atau alias, memungkinkan satu nama mewakili beberapa alamat surel, memfasilitasi pengiriman pesan ke banyak penerima sekaligus.
 - Keuntungan surel meliputi komunikasi yang cepat dan nyaman, kemampuan penyimpanan dan pencarian pesan yang mudah, pengiriman lampiran, efektivitas biaya, dan ketersediaan 24/7.
 - Kelemahan surel mencakup risiko spam dan serangan _phishing_, kelebihan informasi, kurangnya komunikasi tatap muka, potensi miskomunikasi, dan masalah teknis.
+
+# Laporan Mail Server
+
+## Postfix Configuration
+
+Konfigurasi SMTP-Auth untuk menggunakan Davecot SASL Function
+
+1. Instalasi Postfix:
+	```bash
+	apt -y install postfix sasl2-bin
+	```
+2. 
