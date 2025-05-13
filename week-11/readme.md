@@ -55,7 +55,74 @@ Surel, atau surat elektronik, adalah metode utama untuk bertukar pesan melalui i
 Konfigurasi SMTP-Auth untuk menggunakan Davecot SASL Function
 
 1. Instalasi Postfix:
+	Gunakan perintah dibawah ini untuk melakukan instalasi postfix
 	```bash
 	apt -y install postfix sasl2-bin
 	```
-2. 
+2. uncomment mail_owner
+	![postfix](images/postfix/1.jpg)
+3. uncomment and specify hostname
+	Gunakan hostname sesuai dengan kelompok masing-masing yang sudah dikonfigurasi di awal.
+	
+	![postfix](images/postfix/1.jpg)
+4. Uncomment and specify domain name
+	Gunakan domain name sesuai dengan kelompok masing-masing yang sudah dikonfigurasikan pada praktikum sebelumnya
+	
+	![postfix](images/postfix/2.jpg)
+5. Uncomment myorigin
+	![postfix](images/postfix/3.jpg)
+6. Uncomment inet_interfaces
+	![postfix](images/postfix/4.jpg)
+7. Uncomment mydestination
+	![postfix](images/postfix/5.jpg)
+8. Uncomment local_recipient_maps
+	![postfix](images/postfix/6.jpg)
+9. Uncomment mynetworks_style
+	![postfix](images/postfix/7.jpg)
+10. Tambahkan local network
+	Tambahkan local network yang digunakan / terhubung dengan PC
+	
+	![postfix](images/postfix/8.jpg)
+11. Uncomment alias_maps
+	![postfix](images/postfix/9.jpg)
+12. Uncomment alias_database
+	![postfix](images/postfix/10.jpg)
+13. Uncomment home_mailbox
+	![postfix](images/postfix/11.jpg)
+14. Comment smtpd debian dan tambahkan smtpd baru
+	Comment baris smtpd_banner Debian dan tambahkan smtpd_banner yang baru tanpa $email_name
+	
+	![postfix](images/postfix/12.jpg)
+15. Tambahkan beberapa path baru dan satu group baru
+	- sendmail_path
+	- newaliases_path
+	- mailq_path
+	- setgid_group
+	
+	![postfix](images/postfix/13.jpg)
+16. Comment out baris directory-directory
+	```bash
+	# line 679 : comment out
+	#html_directory =
+	
+	# line 683 : comment out
+	#manpage_directory =
+	
+	# line 688 : comment out
+	#sample_directory =
+	
+	# line 692 : comment out
+	#readme_directory =
+```
+17. Ubah inet protocol menjadi IPv4, disable SMTP VRFY command, required HELO command, atur message size limit, dan tambahkan SMTP Auth Settings
+	![postfix](images/postfix/14.jpg)
+18. Jalan command newaliases dan restart postfix
+	```bash
+	root@mail:~# newaliases
+	root@mail:~# systemctl restart postfix
+```
+19. Konfigurasi Additional Settings
+	Konfigurasi ini digunakan untuk menolak spam emails, tetapi harus berhati-hati karena juga bisa menolak normal emails jika ada konfigurasi yang tidak match.
+	
+	![postfix](images/postfix/15.jpg)
+	
