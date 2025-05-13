@@ -54,7 +54,7 @@ Menambahkan file konfigurasi baru yaitu `named.conf.internal-zones` ke dalam fil
 
 ### Konfigurasi Zona DNS di BIND
 
-![13jpg](images/3.jpg)
+![images](images/3.jpg)
 
 - **Zona Forward (kelompok4.home)**
   - Zona ini digunakan untuk menerjemahkan **nama domain ke alamat IP**.

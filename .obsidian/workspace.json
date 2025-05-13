@@ -4,30 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "4d44cf0dcf1dae32",
+        "id": "72ff164ba85f5806",
         "type": "tabs",
         "children": [
           {
-            "id": "d533daf347caaaee",
+            "id": "f6d2b1cada793102",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "week-09/readme.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "readme"
-            }
-          },
-          {
-            "id": "4dcd2a6c22c337c3",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "week-04/readme.md",
+                "file": "week-11/readme.md",
                 "mode": "source",
                 "source": false
               },
@@ -193,23 +179,27 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d533daf347caaaee",
+  "active": "f6d2b1cada793102",
   "lastOpenFiles": [
-    "week-09/images/topologi-dns.jpg",
+    "week-11/images/email.png",
+    "week-11/email.png",
+    "week-11/readme.md",
     "week-09/readme.md",
+    "week-11/images",
+    "week-11/New folder",
+    "Untitled.md",
+    "week-11",
     "week-04/readme.md",
+    "week-09/images/2.jpg",
+    "week-09/images/topologi-dns.jpg",
     "week-09/images/00.jpg",
     "week-07/readme.md",
-    "Untitled.md",
     "week-09/images/IMG_20250424_145805.jpg",
     "week-09/images/IMG_20250424_145606.jpg",
     "week-09/images/IMG_20250424_142023.jpg",
     "week-09/images/9-resolv-pc-lain.jpg",
     "week-09/images/8-tes-dig.jpg",
     "week-09/images/7.jpg",
-    "week-09/images/6.jpg",
-    "week-09/images/5.jpg",
-    "week-09/images/4.jpg",
     "week-09/images",
     "week-09/week-9",
     "week-09"
