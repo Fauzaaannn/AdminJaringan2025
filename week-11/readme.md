@@ -114,6 +114,7 @@ Konfigurasi SMTP-Auth untuk menggunakan Davecot SASL Function
 	# line 692 : comment out
 	#readme_directory =
 ```
+
 17. Ubah inet protocol menjadi IPv4, disable SMTP VRFY command, required HELO command, atur message size limit, dan tambahkan SMTP Auth Settings
 	![postfix](images/postfix/14.jpg)
 	
