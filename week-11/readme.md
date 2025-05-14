@@ -132,6 +132,7 @@ Konfigurasi ini digunakan untuk menolak spam emails, tetapi harus berhati-hati k
 ## Davecot Configuration
 
 Konfigurasi Fungsi SASL ke Postfix
+
 1. Instalasti dovecot-core dovecot-pop3d dovecot-imapd
 	![postfix](images/Dovecot/1.jpg)
 2. Uncomment baris yang menentukan alamat IP yang akan digunakan Dovecot untuk mendengarkan koneksi masuk.
@@ -160,3 +161,21 @@ Konfigurasi Fungsi SASL ke Postfix
 	```bash
 	root@mail:~# systemctl restart dovecot
 	```
+## Add Mail User Accounts 
+
+Menambahkan Mail user account untuk menggunakan Mail Service, pada contoh kasus ini menggunakan akun OS User.
+
+1. Instalasi Mailutils
+	```bash
+	root@mail:~# apt -y install mailutils
+	```
+
+2. Atur environment variables untuk menggunakan Maildir dan tambahkan OS user baru
+	![postfix](images/1.jpg)
+	
+3. Login sebagai user dan coba untuk mengirimkan email
+	![postfix](images/1.jpg)
+	
+	![postfix](images/2.jpg)
+	
+	Dapat dilihat email sudah terkirim dan diterima.
