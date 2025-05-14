@@ -124,8 +124,39 @@ Konfigurasi SMTP-Auth untuk menggunakan Davecot SASL Function
 	root@mail:~# systemctl restart postfix
 	```
 
-19. Konfigurasi Additional Settings
-	Konfigurasi ini digunakan untuk menolak spam emails, tetapi harus berhati-hati karena juga bisa menolak normal emails jika ada konfigurasi yang tidak match.
+Konfigurasi Additional Settings
+Konfigurasi ini digunakan untuk menolak spam emails, tetapi harus berhati-hati karena juga bisa menolak normal emails jika ada konfigurasi yang tidak match.
+
+![postfix](images/postfix/15.jpg)
+
+## Davecot Configuration
+
+Konfigurasi Fungsi SASL ke Postfix
+1. Instalasti dovecot-core dovecot-pop3d dovecot-imapd
+	![postfix](images/Dovecot/1.jpg)
+2. Uncomment baris yang menentukan alamat IP yang akan digunakan Dovecot untuk mendengarkan koneksi masuk.
+	Penjelasan rinci:
+	- `*` berarti semua alamat IPv4 pada sistem (misalnya `0.0.0.0`).
+	- `::` berarti semua alamat IPv6 pada sistem.
 	
-	![postfix](images/postfix/15.jpg)
+	![postfix](images/Dovecot/2.jpg)
+3. Uncomment dan ubah untuk allow plain text auth
+	![postfix](images/Dovecot/3.jpg)
+4. Tambahkan mekanisme auth
+	![postfix](images/Dovecot/4.jpg)
+5. Ubah mail location ke Maildir
+	![postfix](images/Dovecot/5.jpg)
+6. Mengaktifkan otentikasi SMTP (SMTP AUTH) antara Postfix dan Dovecot melalui socket UNIX.
+	Penjelasan fungsi:
+	- `unix_listener /var/spool/postfix/private/auth`  
+		Menyediakan **socket UNIX** di path tersebut yang akan digunakan oleh Postfix untuk berkomunikasi dengan Dovecot **auth service**.
+	- `mode = 0666`  
+		Mengatur **permission** socket menjadi "read/write" untuk semua user (ini aman karena path-nya berada di direktori yang hanya dapat diakses oleh root dan pengguna tepercaya seperti `postfix`).
+	- `user = postfix` dan `group = postfix`  
+		Mengatur **kepemilikan** socket supaya **Postfix** bisa mengaksesnya, karena proses Postfix berjalan sebagai user dan group `postfix`.
 	
+	![postfix](images/Dovecot/6.jpg)
+7. Restart Dovecot
+	```bash
+	root@mail:~# systemctl restart dovecot
+	```
