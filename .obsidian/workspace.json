@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "week-11/readme.md",
+                "file": "week-12/readme.md",
                 "mode": "source",
                 "source": false
               },
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "8680d820a68d9701",
@@ -183,27 +182,33 @@
   },
   "active": "f6d2b1cada793102",
   "lastOpenFiles": [
-    "week-11/images/email.png",
-    "week-11/email.png",
+    "week-12/images/papan.jpg",
+    "week-12/images/9.jpg",
+    "week-12/images/8.jpg",
+    "week-12/images/7.jpg",
+    "week-12/images/6.jpg",
+    "week-12/images/5.jpg",
+    "week-12/images/2-evo.jpg",
+    "week-12/images/3-evo.jpg",
+    "week-12/images/1-evo.jpg",
+    "week-12/images/4.jpg",
+    "week-12/images/postfix-main-cf.jpg",
     "week-11/readme.md",
+    "week-12/readme.md",
+    "README.md",
+    "Untitled.md",
+    "week-12/images",
+    "week-12/Images",
+    "week-12/New folder",
+    "week-12",
+    "New folder",
     "week-09/readme.md",
     "week-11/images",
     "week-11/New folder",
-    "Untitled.md",
     "week-11",
     "week-04/readme.md",
-    "week-09/images/2.jpg",
-    "week-09/images/topologi-dns.jpg",
-    "week-09/images/00.jpg",
     "week-07/readme.md",
-    "week-09/images/IMG_20250424_145805.jpg",
-    "week-09/images/IMG_20250424_145606.jpg",
-    "week-09/images/IMG_20250424_142023.jpg",
-    "week-09/images/9-resolv-pc-lain.jpg",
-    "week-09/images/8-tes-dig.jpg",
-    "week-09/images/7.jpg",
     "week-09/images",
-    "week-09/week-9",
-    "week-09"
+    "week-09/week-9"
   ]
 }
