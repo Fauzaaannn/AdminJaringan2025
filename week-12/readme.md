@@ -34,7 +34,7 @@ Dalam praktikum week-11 sudah dicoba untuk mengirim email ke diri sendiri dan be
 	
 	![images](images/1-evo.jpg)
 	
-2. Konfigurasi server / name server untuk menerimal email dari kelompok lain.
+2. Konfigurasi server / name server untuk menerima email dari kelompok lain.
 	
 	![images](images/2-evo.jpg)
 	
