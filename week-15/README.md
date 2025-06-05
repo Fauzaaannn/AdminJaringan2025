@@ -406,7 +406,7 @@ Mengambil daftar nama vendor dan jumlah total pesanan yang terkait dengan produk
 
 ### Import Data
 
-Langkah pertama yang perlu dilakukan untuk menampilkan data menggunakan tampilan power BI adalah meng-import data dari URL Endpoint yang sudah disetup menggunakan Docker. 
+Langkah pertama yang perlu dilakukan untuk menampilkan data menggunakan tampilan power BI adalah meng-import data dari URL Endpoint yang sudah disetup menggunakan Docker. Pada project ini, ada total 11 Endpoint yang akan digunakan.
 Contoh:
 
 ```bash
