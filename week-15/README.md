@@ -1,4 +1,23 @@
-## Langkah-Langkah
+<div align="center">
+  <h1 style="text-align: center;font-weight: bold">Laporan Praktikum
+  <br>Workshop Administrasi Jaringan</h1>
+  <h4 style="text-align: center;">Dosen Pengampu : Dr. Ferry Astika Saputra, S.T., M.Sc.</h4>
+</div>
+<br />
+<div align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/id/4/44/Logo_PENS.png" alt="Logo PENS">
+  <h3 style="text-align: center;">Disusun Oleh : </h3>
+  <p style="text-align: center;">
+    <strong>Nama: Fauzan Abderrasheed</strong><br>
+    <strong>NRP: 3123500020 </strong><br>
+    <strong>Kelas: D3 IT A</strong>
+  </p>
+<h3 style="text-align: center;line-height: 1.5">Politeknik Elektronika Negeri Surabaya<br>Departemen Teknik Informatika Dan Komputer<br>Program Studi Teknik Informatika<br>2023/2024</h3>
+  <hr><hr>
+</div>
+
+
+## Langkah-Langkah Set Up Docker & Laravel
 
 Ikuti langkah-langkah di bawah ini untuk menjalankan proyek di mesin lokal Anda:
 
@@ -380,4 +399,40 @@ Mengambil daftar nama vendor dan jumlah total pesanan yang terkait dengan produk
       // ... daftar vendor lainnya
     ]
   }
-  ```
+  ````
+
+
+## Menghubungkan API dengan Power BI 
+
+### Import Data
+
+Langkah pertama yang perlu dilakukan untuk menampilkan data menggunakan tampilan power BI adalah meng-import data dari URL Endpoint yang sudah disetup menggunakan Docker. 
+Contoh:
+
+```bash
+http://localhost:8000/api/customers/longest-shipping
+```
+
+Gunakan _Get Data_ dan pilih opsi _Web_ untuk import data menggunakan URL Endpoint seperti di atas.
+
+![docker2](images/import-data.png)
+
+![docker2](images/import-data-2.png)
+
+### Pilih Visualisasi
+
+Langkah kedua adalah memilih opsi visualisasi yang diperlukan, seperti chart, tabel dan sebagainya.
+
+![docker2](images/visual.png)
+
+### Pilih Data Visualisasi
+
+Langkah ketiga adalah memilih data yang akan divisualisasikan, dengan mencentang kolom data yang sudah di-import sebelumnya.
+
+![docker2](images/pilih-data.png)
+
+### Tampilan Data
+
+Jika sudah, maka data akan tertampilkan seperti ini
+
+![docker2](images/tampilan.png)
