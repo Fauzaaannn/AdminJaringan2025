@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "week-12/readme.md",
+                "file": "week-15/README.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "readme"
+              "title": "README"
             }
           }
         ]
@@ -182,20 +182,22 @@
   },
   "active": "f6d2b1cada793102",
   "lastOpenFiles": [
+    "week-13/readme.md",
+    "week-13/images/WhatsApp Image 2025-05-22 at 15.22.12_16de3b92.jpg",
+    "week-13/images/Screenshot (74).png",
+    "week-13/images/Screenshot (73).png",
+    "week-13/images/Screenshot (72).png",
+    "week-13/images/Screenshot (71).png",
+    "week-13/images/WhatsApp Image 2025-05-22 at 15.44.26_a4c85ee6.jpg",
+    "week-13/images/WhatsApp Image 2025-05-22 at 15.41.54_3564e24f.jpg",
+    "README.md",
+    "week-12/readme.md",
+    "week-13/images",
+    "week-13",
     "week-12/images/papan.jpg",
     "week-12/images/9.jpg",
     "week-12/images/8.jpg",
-    "week-12/images/7.jpg",
-    "week-12/images/6.jpg",
-    "week-12/images/5.jpg",
-    "week-12/images/2-evo.jpg",
-    "week-12/images/3-evo.jpg",
-    "week-12/images/1-evo.jpg",
-    "week-12/images/4.jpg",
-    "week-12/images/postfix-main-cf.jpg",
     "week-11/readme.md",
-    "week-12/readme.md",
-    "README.md",
     "Untitled.md",
     "week-12/images",
     "week-12/Images",
@@ -207,8 +209,6 @@
     "week-11/New folder",
     "week-11",
     "week-04/readme.md",
-    "week-07/readme.md",
-    "week-09/images",
-    "week-09/week-9"
+    "week-07/readme.md"
   ]
 }
